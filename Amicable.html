@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Amicable Numbers</title>
+	<script type="text/javascript">
+		function display_numbers(){
+			var number_one = document.getElementById('number_one').value;
+			var number_two= document.getElementById('number_two').value;
+			var array_parra = document.getElementById("Array");
+			array_parra.innerHTML = "";
+			var Display_1_parra = document.getElementById('Display_1');
+			var Display_2_parra = document.getElementById('Display_2');
+			var amicable_parra = document.getElementById('Amicable');
+		    factor_array_1 = getFactors(number_one);
+		    factor_array_2 = getFactors(number_two);
+			showFactors(factor_array_1);
+			showFactors(factor_array_2);
+			var sum_1 = addFactors(factor_array_1);
+			var sum_2 = addFactors(factor_array_2);
+			Display_1_parra.innerHTML = "The first number is: " + number_one;
+			Display_2_parra.innerHTML = "The second number is: " + number_two;
+		
+			if(sum_2 == number_one && sum_1 == number_two){
+				amicable_parra.innerHTML = "The Numbers Are Amicable!";
+			}
+			else{
+				amicable_parra.innerHTML = "The Numbers Are Not Amicable.";
+			}
+		}
+		function isFactor(number, test_number){
+			if(test_number%number == 0)
+				return true;
+			else
+				return false;
+		}
+
+		function showFactors(factor_array){
+			var array_parra = document.getElementById("Array");
+			var text = "<ul>";
+			for(var i = 0; i<factor_array.length; i++){
+                text += "<li style= \"list-style: none; display: inline-block;padding: 0 20px; text_align: center\">" + factor_array[i] + "</li>";
+			}
+			text += "</ul>";
+			array_parra.innerHTML += "Array: " + text;
+		}
+		function addFactors(factor_array){
+			var sum = 0;
+			for (var i = 0; i < factor_array.length-1; i++) {
+				sum += factor_array[i];
+			}
+			return sum;
+		}
+
+		function getFactors(number){
+			var factor_array = [];
+			for(var i = 1; i<=number; i++ ){
+				if(isFactor(i,number) == true){
+					factor_array.push(i);
+				}
+			}
+			return factor_array;
+		}
+		
+	</script>
+</head>
+<body>
+	<p id="Display_1"></p>
+	<p id="Display_2"></p>
+	<p id="Array"></p>
+	<p id="Amicable"></p>
+ 		 1st Number:<br> <input type="text" id="number_one" placeholder="Number One">
+         <br>
+         2nd Number:<br> <input type="text" id="number_two" placeholder="Number Two">
+         <br>
+         <br> <input type="button" value="Enter" onclick="display_numbers();"/>
+</body>
+</html>
