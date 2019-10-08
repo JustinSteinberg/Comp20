@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+      <head>
+         <meta charset="utf-8">
+         <title>HW4</title>
+         <link rel="stylesheet" type="text/css" href="HW4_style.css">
+         <script type="text/javascript">
+            function get_numbers(){
+               var welcome_parra = document.getElementById('welcome');
+               var welcome_parra2 = document.getElementById('welcome2');
+               var numbers = document.getElementById('numbers');
+               var lucky_number = document.getElementById('lucky_number');
+               var array = numbers.value.split(" ");
+               var numArray = [];
+               var sortedArray = [];
+               array.push(lucky_number.value);
+               for (var i = 0; i < array.length; i++) {
+                      if(array[i] != " ")
+                     {
+                       numArray.push(array[i]);
+                     }
+               }
+               if(numArray.length != 6){
+                  alert("Please Enter A Valid Lottery Number");
+               }
+               for(var j = 0; j<numArray.length-1;j++){
+                  if(numArray[j] > 48 || numArray[j]<1){
+                     alert("All Lottery Numbers must be 1-48");
+                  }
+               }
+               if(numArray[5] > 18 || numArray[5] < 1){
+                  alert("The lucky number must be 1-18");
+               }               
+               else{
+                  var text = "<ul>";
+                  var text_sorted = "<ul>";
+   
+                   sortedArray = numArray.concat().sort((a,b)=>a-b);
+                   for (var j = 0; j < numArray.length; j++) {
+               
+                       text += "<li style= \"list-style: none; display: inline-block;padding: 0 20px; text_align: center\">" + numArray[j] + "</li>";
+                       text_sorted += "<li style= \"list-style: none; display: inline-block;padding: 0 20px;\">" + sortedArray[j] + "</li>";
+      
+                   }
+                    text += "</ul>";
+                    welcome_parra.innerHTML = "Your Numbers Are: " + text;
+                    welcome_parra2.innerHTML = "The Sorted Array: " + text_sorted; 
+                    payout_Calculator(numArray);
+               }
+            }
+
+            function payout_Calculator(Array){
+               var random_Array = [];
+               var random_parra = document.getElementById('random');
+               var payout_parra = document.getElementById('payout')
+               var text = "<ul>";
+               var Matched_num = 0;
+               for(var i = 0; i<5;i++){
+                  random_Array.push(parseInt((Math.random()*48)+1));
+               }
+               random_Array.push(parseInt((Math.random()*18)+1));
+               for (var j = 0; j < random_Array.length; j++) {
+               
+                   text += "<li style= \"list-style: none; display: inline-block;padding: 0 20px; text_align: center;\">" + random_Array[j] + "</li>";
+               }
+               for(var k = 0; k<4;k++){
+                  for(var l = 0; l<4;l++){
+                     if(random_Array[k]==Array[l]){
+                        Matched_num++;
+                     }
+                  }
+               }
+               if(random_Array[5]==Array[5])
+               {
+                  if (Matched_num==5){
+                     payout_parra.innerHTML = "Your Payout is $7,000 a WEEK for Life!";
+                  }
+                  else if(Matched_num==4){
+                     payout_parra.innerHTML = "Your Payout is $5,000";
+                  }
+                  else if(Matched_num==3){
+                     payout_parra.innerHTML = "Your Payout is $150";
+                  }
+                  else if(Matched_num==2){
+                     payout_parra.innerHTML = "Your Payout is $25";
+                  }
+                  else if(Matched_num==1){
+                     payout_parra.innerHTML = "Your Payout is $6";
+                  }
+                  else if(Matched_num==0){
+                      payout_parra.innerHTML = "Your Payout is $4";
+                  }
+               }
+               else if(Matched_num == 5){
+                     payout_parra.innerHTML = "$25,000 a YEAR for Life!";
+               }
+               else if(Matched_num == 4)
+               {
+                     payout_parra.innerHTML = "Your Payout is $200";
+               }
+               else if(Matched_num == 3 || random_Array[5]==Array[5])
+               {
+                  payout_parra.innerHTML = "Your Payout is $20";
+               }
+               else if(Matched_num == 2 || random_Array[5]==Array[5])
+               {
+                   payout_parra.innerHTML = "Your Payout is $3";
+               }
+               else{
+                  payout_parra.innerHTML = "";
+               }
+               
+               random_parra.innerHTML = "The Lottery Numbers Are: " + text;
+
+            }
+         </script>
+
+      </head>
+      <body>
+      <p id="welcome">Enter your Lottery Numbers:</p>
+      <p id="welcome2"></p>
+      <p id="random"></p>
+      <p id="payout" class="thick"></p>
+      <form>
+         5 Lottery Numbers:<br> <input type="text" id="numbers" placeholder="Lottery Number">
+         <br>
+         Lucky Number:<br> <input type="text" id="lucky_number" placeholder="Lucky Number">
+         <br>
+         <br> <input type="button" value="Enter" onclick="get_numbers();"/>
+      </form>
+   </body>
+</html>
