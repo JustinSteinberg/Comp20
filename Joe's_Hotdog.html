@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Joe's Hotdog</title>
+    <link rel="stylesheet" type="text/css" href="Joes_Hotdog.css">
+	<script type="text/javascript">
+		var food_prices = [];
+		var food_quant = [];
+		food_prices["Hotdogs"] = 3.25;
+		food_prices["French Fries"] = 2.00;
+		food_prices["Drinks"] = 1.5;
+		function order(){
+			order_parra = document.getElementById('order');
+			num_hotdogs = document.getElementById('hotdog').value;
+			num_drinks = document.getElementById('Drinks').value;
+			num_fries = document.getElementById('French_Fries').value;
+			food_quant["Hotdogs"] = num_hotdogs;
+			food_quant["French Fries"] = num_fries;
+			food_quant["Drinks"] = num_drinks;
+			var text = "<ul>";
+			for(var key in food_quant){
+				text += "<li style= \"list-style: none; display: inline-block;padding: 0 20px; text_align: center\">" + "Number of " + key + ": " + food_quant[key] + "</li>";
+			}
+			text += "</ul>";
+			order_parra.innerHTML = "Your Order: " + text;
+			Calculator();
+		}
+
+		function Calculator(){
+			cost_parra = document.getElementById("Cost");
+			total_parra = document.getElementById("Total");
+			discount_parra = document.getElementById("Discount");
+			tax_parra = document.getElementById("Tax");
+			var total_price = 0.0;
+			var total_price_tax = 0.0;
+			
+			for (var key in food_prices){
+				food_prices[key] = food_prices[key]*food_quant[key];
+				total_price = total_price + food_prices[key];
+			}
+	
+			if (total_price > 20){
+				total_price = total_price - total_price*0.1;
+				discount_parra.innerHTML = "You get 10% off on your Order!";
+			}
+
+			total_price_tax = total_price + total_price*.0625;
+			total_price_tax = Math.round(100*total_price_tax)/100;
+			var text = "<ul>";
+
+			for(var value in food_prices){
+				text += "<li style= \"list-style: none; display: inline-block;padding: 0 20px; text_align: center\">" + "Cost of " + value + ": $"+ food_prices[value] + "</li>";
+			}
+			text += "</ul>";
+			cost_parra.innerHTML = "Order Cost: " + text;
+			total_parra.innerHTML = "Cost Before Tax = $" + total_price;
+			tax_parra.innerHTML = "Your Total With Tax = $" + total_price_tax;
+			Clear();
+
+		}
+
+		function Clear(){
+			for(var val in food_prices){
+				if(val == "Hotdogs"){
+					food_prices[val] = 3.25;
+				}
+				else if(val == "French Fries"){
+					food_prices[val] = 2.00;
+				}
+				else if(val == "Drinks"){
+					food_prices[val] = 1.5;
+				}
+				food_quant[val] = 0;
+			}
+			total_price = 0;
+			total_price_tax = 0;
+		}
+	</script>
+</head>
+<body>
+	<p id="order">Enter Your Order:</p>
+	<p id="Cost"></p>
+	<p id="Discount" class="thick"></p>
+	<p id="Total" class ="thick"></p>
+	<p id="Tax" class ="thick"></p>
+	<form>
+         Hotdogs ($3.25):<br> <input type="text" id="hotdog" placeholder="hotdog">
+         <br>
+         Drinks ($1.50):<br> <input type="text" id="Drinks" placeholder="Drinks">
+         <br>
+         French Fries ($2.00):<br> <input type="text" id="French_Fries" placeholder="French Fries">
+         <br> 
+         <br>
+         <input type="button" value="Order" onclick="order();"/>
+	</form>
+</body>
+</html>
