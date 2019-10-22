@@ -1,0 +1,66 @@
+*{
+	margin: 10px;
+	padding: 0px;
+}
+
+		    #my-thumbs {
+                padding: 0;
+                overflow: hidden;
+                position: center;
+                display: inline;
+               
+            }
+            #my-thumbs::after {
+                clear: both;
+                height: 5px;
+                width: 100%;
+                height: 20px;
+            }
+
+
+            #my-thumbs img {
+                width: calc( 20% - 10px );
+                height: calc( 20% - 10px );
+                margin: 5px;
+                float: left;
+            }
+           p{
+           		width: 100px;
+           		height: 20px;
+           		padding: 0;
+           		display: inline-block;
+           		position: center;
+           		font-style: italic;
+          	}
+
+            #my-enlargement {
+                padding-left: 10px;
+                padding-right: 10px;
+                float: left;
+                background-repeat: no-repeat;
+                background-size: cover;
+                overflow: hidden;
+                background-attachment: scroll;
+            }
+            
+            #my-enlargement::after {
+                content: none;
+            }
+            #random{
+            	visibility: hidden;
+            }
+            .centered {
+ 				 position: relative;
+ 				 top: 50%;
+  			   	left: 50%;
+  				transform: translate(-50%, -50%);
+			}
+          /* #my-enlargement img {
+                max-width: 90%;
+                max-height: 90%;
+                position: absolute;
+                top: 60%;
+                left: 50%;
+                transform: translate( -50%, -50% );
+            }
+            */
