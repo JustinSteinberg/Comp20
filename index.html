@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JSON and AJAX</title>
+	<link rel="stylesheet" type="text/css" href="json_style.css">
+
+</head>
+<body>
+	<header>
+		<h1>JSON</h1>
+		<button id="btn" class="btn">Get Info</button>
+	</header>
+	<p id = "stringify"></p>
+
+	<form id="f">
+		<h2>Filter the Table:</h2>
+		<select id="selector">
+			<option value="Rap/Hip Hop">Rap/Hip Hop</option>
+			<option value="Rock">Rock</option>
+			<option value="Alternative">Alternative</option>
+			<option value="New Wave">New Wave</option>
+			<option value="Country">Country</option>
+		</select>
+		<input id="btn2" class="btn" type="button" value="Submit">
+	</form>
+	<p id="selected"></p>
+	<div id="band-info"></div>
+
+	<script type="text/javascript" src="bands.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
