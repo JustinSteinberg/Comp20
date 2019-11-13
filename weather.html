@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Weather App</title>
+</head>
+<body>
+	<div style="text-align: center;" id="Weather">
+		<h2 style="text-align: center;">Enter City</h2>
+		<input id="city" value="London"> </input>
+		<h2 style="text-align: center;">Enter Units</h2>
+		<input id="units" value="metric"> </input>
+		<h2 style="text-align: center;">Request Weather</h2>
+		<button type="button" onclick="loadInfo()">Get Weather</button>
+	</div>
+	
+	<p style="text-align: center;"><span id="temp"></span></p>
+	<p style="text-align: center;"><span id="wind"></span></p>
+	<p style="text-align: center;"><span id="country"></span></p>
+	<div>
+		<h3 style="text-align: center;">The OpenWeather API allows for access of any current weather data from any location on earth. It returns its data in JSON, XML, or HTML format. I found the website at
+			<a href="https://www.diycode.cc/projects/toddmotto/public-apis">www.diycode.cc/projects/toddmotto/public-apis</a>. The API Option is that you can choose which city you want to get data from and the units. This API would be helpful in any weather application or in any GPS application such as google maps.  
+		</h3>
+	</div>
+<script>
+
+	function loadInfo(){
+		var Weather = new XMLHttpRequest();
+		var api = "https://openweathermap.org/data/2.5/weather?q=";
+		var city = document.getElementById("city").value;
+		var apiKey = "&appid=b6907d289e10d714a6e88b30761fae22&units="; 
+		var units = document.getElementById("units").value;
+		var url = api + city + apiKey + units;
+		Weather.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				var r = JSON.parse(this.responseText);
+				var dis = "Current Location: " + r.name + "<br />";
+				var country = "Country: " + r.sys.country + "<br />";
+				if(units == "metric"){
+					var temp = "Temperature: " + r.main.temp + " Degrees Celcius" + "<br />";
+					var wind = "Wind Speed: " + r.wind.speed + " km/hr" + "<br />";
+				}
+				else if(units == "imperial"){
+					var temp = "Temperature: " + r.main.temp + " Degrees Fahrenheit " + "<br />";
+					var wind = "Wind Speed: " + r.wind.speed + " mi/hr" + "<br />";
+				}
+				document.getElementById("Weather").innerHTML = dis;
+				document.getElementById("temp").innerHTML = temp;
+				document.getElementById("wind").innerHTML = wind;
+				document.getElementById("country").innerHTML = country;
+			}
+		};
+		Weather.open("GET", url , false);
+		Weather.send();
+	}
+</script>
+
+</body>
+</html>
