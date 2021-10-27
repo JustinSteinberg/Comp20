@@ -12,6 +12,9 @@ p{
 p.thick {
   font-weight: bold;
 }
+body {
+	background-color: #DBF9FC;
+}
 input[type=text]{
 	width: 25%;
 	padding: 12px 20px;
