@@ -13,13 +13,14 @@ p.thick {
   font-weight: bold;
 }
 body {
-	background: repeating-radial-gradient(
-  	circle,
-  	purple,
-  	purple 10px,
-  	#4b026f 10px, 
-  	#4b026f 20px);
-}
+	background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+  ),
+  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/old_map_@2X.png);}
 input[type=text]{
 	width: 25%;
 	padding: 12px 20px;
